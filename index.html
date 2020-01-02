@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>CleaveJS</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <input type="text" class="txt-credit-card form-control" placeholder="Insira os números do seu cartão">
+        </div>
+        <div class="form-group">
+            <input type="text" class="txt-date form-control" placeholder="dd/mm/yyyy">
+        </div>
+        <div class="form-group">
+            <input type="text" class="txt-custom form-control" placeholder="Insira seu valor personalizado">
+        </div>
+        <button id="btn-raw" type="button">Enviar</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.5.3/cleave.min.js"></script>
+    <script>
+        const cleaveCC = new Cleave('.txt-credit-card', {
+            creditCard: true
+        });
+        const cleaveDate = new Cleave('.txt-date', {
+            date: true,
+            delimiter: '/',
+            datePattern: ['d', 'm', 'Y']
+        })
+        const cleaveCustom = new Cleave('.txt-custom', {
+            prefix: 'SON',
+            delimiter: '-',
+            uppercase: true,
+            blocks: [3, 3, 4]
+        });
+        const cleaveBtn = document.querySelector('#btn-raw');
+        cleaveBtn.addEventListener('click', function(e){
+            console.log(cleaveCC.getRawValue(), cleaveDate.getRawValue(), cleaveCustom.getRawValue());
+            
+        })
+    </script>
+</body>
+</html>
